@@ -1,29 +1,32 @@
 .trash:hover {
   animation: empty 0.2s linear;
   transform: rotate(135deg);
-  filter: invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg)
-    brightness(104%) contrast(97%);
+  filter: invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
 }
+
 @keyframes empty {
   0% {
     transform: rotate(27deg);
   }
+
   25% {
     transform: rotate(54deg);
   }
+
   50% {
     transform: rotate(81deg);
   }
+
   75% {
     transform: rotate(108deg);
   }
+
   100% {
     transform: rotate(135deg);
   }
 }
-.edit {
-  align-self: center;
-}
+
+
 .edit:hover {
   animation: bubble 1s linear infinite;
 }
@@ -32,21 +35,25 @@
   0% {
     transform: scale(1);
   }
+
   25% {
     transform: scale(1.1);
   }
+
   50% {
     transform: scale(1.2);
   }
+
   75% {
     transform: scale(1.1);
   }
+
   100% {
     transform: scale(1);
   }
 }
 
 
-.l1{
+.l1 {
   size: 10rem;
 }

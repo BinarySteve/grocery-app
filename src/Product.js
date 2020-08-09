@@ -1,38 +1,45 @@
-import React from "react";
+import React from 'react';
 
-import Trash from "../node_modules/bootstrap-icons/icons/trash2-fill.svg";
+import Trash from '../node_modules/bootstrap-icons/icons/trash2-fill.svg';
 
-import { db } from "./firebase";
+import ModalProduct from './ModalProduct';
 
-import ModalProduct from "./ModalProduct";
-
-function Product({ id, name, cost, quantity }) {
-  const deleteProduct = (e) => {
-    db.collection("products").doc(id).delete();
-  };
-
-  return (
-    <tbody>
-      <tr>
-        <td className="text-left">
-          <span className="l1">
-            <ModalProduct id={id} name={name} cost={cost} quantity={quantity} />
-            <img
-              className="trash mr-5"
-              src={Trash}
-              onClick={deleteProduct}
-              style={{ cursor: "pointer" }}
-              alt=""
-            />
-          </span>
-          {quantity}
-        </td>
-        <td>{name}</td>
-        <td>${cost}</td>
-        <td>${(cost * quantity).toFixed(2)} </td>
-      </tr>
-    </tbody>
-  );
+function Product({ id, name, cost, quantity, deleteProduct, updateProduct }) {
+	return (
+		<tbody className="text-center">
+			<tr>
+				<td>{quantity}</td>
+				<td className="text-capitalize">
+					{name} <div>(${cost})</div>{' '}
+				</td>
+				<td className="">
+					<div> ${(cost * quantity).toFixed(2)}</div>
+				</td>
+				<td>
+					<div className="d-flex ">
+						<ModalProduct
+							id={id}
+							name={name}
+							cost={cost}
+							quantity={quantity}
+							updateProduct={updateProduct}
+						/>
+						<img
+							className="trash "
+							onClick={() => {
+								if (window.confirm(`Delete ${name}?`)) {
+									deleteProduct(id);
+								}
+							}}
+							src={Trash}
+							style={{ cursor: 'pointer' }}
+							alt=""
+						/>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	);
 }
 
 export default Product;
