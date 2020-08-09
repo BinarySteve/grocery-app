@@ -17,6 +17,7 @@ import { db } from './firebase';
 import firebase from 'firebase';
 import { useHistory, Redirect } from 'react-router-dom';
 import { useStateValue } from './StateProvider';
+import addBasket from "./addBasket.png";
 
 function ProductCreate(props) {
 	const [ { user } ] = useStateValue();
@@ -38,7 +39,7 @@ function ProductCreate(props) {
 
 	return (
 		<div className="container mb-5">
-			<h1 className="mt-5">Add New Product</h1>
+			<h1 className="mt-5">Add Product <img src={addBasket} width="50px" height="50px" alt="add"/></h1>
 			<Card className="mt-5">
 				<CardHeader>Subtotal: ${(quantity * cost).toFixed(2)}</CardHeader>
 				<CardBody>

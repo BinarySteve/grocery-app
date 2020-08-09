@@ -1,8 +1,11 @@
 import React from "react";
 import "./Home.css";
-import { Jumbotron, Button } from "reactstrap";
+import { Jumbotron } from "reactstrap";
 import { Redirect, Link } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
+import require from "./require.png";
+import addBasket from "./addBasket.png";
+import bill from "./bill.png";
 
 function Home() {
   const [{ user }] = useStateValue();
@@ -16,15 +19,21 @@ function Home() {
           <hr className="my-2" />
 
           <div className="d-flex justify-content-around mt-5">
-            <Button className="home-btn" tag={Link} to="/list" size="lg" color="dark">
-              Look at Grocery List
+            <Link className="btn m-1" to="/list" title="Grocery List">
+              <img src={require} className="img-fluid" alt="" />
+            </Link>
+            <Link className="btn m-1" to="/add" title="Add Item">
+              <img src={addBasket} className="img-fluid" alt="" />
+            </Link>
+            <Link className="btn m-1" to="/cart" title="View Cart">
+              <img src={bill} className="img-fluid" alt="" />
+            </Link>
+            {/* <Button tag={Link} to="/add" size="lg" color="dark">
+              <img src={addBasket} alt="" />
             </Button>
-            <Button className="home-btn" tag={Link} to="/add" size="lg" color="dark">
-              Add to Groceries
-            </Button>
-            <Button className="home-btn" size="lg" tag={Link} to="/cart" color="dark">
-              Go to Grocery Cart
-            </Button>
+            <Button size="lg" tag={Link} to="/cart" color="dark">
+              <img src={bill} alt="" />
+            </Button> */}
           </div>
         </Jumbotron>
       )}
