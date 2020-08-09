@@ -1,25 +1,56 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import Login from "./Login";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Home from "./Home";
+import Navigation from "./Navigation";
+import ProductCreate from "./ProductCreate";
+import GroceryList from "./GroceryList";
+import { auth } from "./firebase";
+import { useStateValue } from "./StateProvider";
+import GroceryCart from "./GroceryCart";
 
 function App() {
+  const [{  }, dispatch] = useStateValue();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        dispatch({
+          type: "SET_USER",
+          user: authUser,
+        });
+      } else {
+        dispatch({
+          type: "SET_USER",
+          user: null,
+        });
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navigation />
+      {/* {!user && !loggedIn && (
+        <Redirect
+          to={{
+            pathname: "/login",
+          }}
+        />
+      )} */}
+      <Switch>
+        <Route path="/list" component={GroceryList} />
+        <Route path="/login" component={Login} />
+
+        <Route path="/cart" component={GroceryCart} />
+        <Route path="/add" component={ProductCreate} />
+        <Route path="/" component={Home} />
+      </Switch>
+    </Router>
   );
 }
 

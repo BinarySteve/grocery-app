@@ -1,0 +1,9 @@
+.hover:hover{
+    transform: scale(1.01);
+    background-color: lightslategray;
+    color:whitesmoke
+}
+.completed{
+    text-decoration: line-through;
+    opacity: 0.5;
+}
