@@ -13,7 +13,7 @@ import { Redirect } from "react-router-dom";
 import "./GroceryList.css";
 import { db } from "./firebase";
 import Trash from "../node_modules/bootstrap-icons/icons/trash2-fill.svg";
-import firebase from "firebase";
+
 import { useStateValue } from "./StateProvider";
 import require from "./require.png";
 
@@ -47,20 +47,25 @@ function GroceryList() {
     };
   }, [setList]);
 
-  const addToList = (e) => {
-    e.preventDefault();
+  const addToList = () => {
+    const newList = [...list];
     db.collection("list").add({
       name: input,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
-    setInput("");
-    setList();
+
+    setList([newList, { input }]);
   };
 
   const deleteItem = (id) => {
     db.collection("list").doc(id).delete();
     const newList = list.filter((item) => item.id !== id);
-    setList(newList);
+    return setList(newList);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    addToList();
+    setInput("");
   };
 
   return (
@@ -71,7 +76,7 @@ function GroceryList() {
           Grocery List{" "}
           <img src={require} width="50px" height="50px" alt="list" />
         </h1>
-        <Form className="mt-5" onSubmit={addToList}>
+        <Form className="mt-5" onSubmit={handleSubmit}>
           <div className="container">
             <FormGroup row>
               <InputGroup>

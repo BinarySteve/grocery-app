@@ -55,7 +55,16 @@ function GroceryCart(props) {
   };
 
   const updateProduct = (id, name, cost, quantity) => {
-    db.collection("products").doc(id).update({ name, cost, quantity });
+    const newProducts = [...products];
+    newProducts.map((item) => {
+      if (item.id === id) {
+        item.name = name;
+        item.cost = cost;
+        item.quantity = quantity;
+      }
+      db.collection("products").doc(id).update({ name, cost, quantity });
+    });
+    return setProducts(newProducts);
   };
   return (
     <div>
