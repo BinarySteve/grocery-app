@@ -19,7 +19,7 @@ import { useHistory, Redirect } from 'react-router-dom';
 import { useStateValue } from './StateProvider';
 import addBasket from "./addBasket.png";
 
-function ProductCreate(props) {
+function ProductCreate() {
 	const [ { user } ] = useStateValue();
 	const [ name, setName ] = useState('');
 	const [ cost, setCost ] = useState('');

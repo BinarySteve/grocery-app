@@ -21,13 +21,13 @@ function GroceryList() {
   const [{ user }] = useStateValue();
   const [input, setInput] = useState("");
   const [list, setList] = useState([]);
+
   useEffect(() => {
     //fire when page loads
     let mounted = true;
     const listRef = db.collection("list");
-
-    listRef.get().then((list) => {
-      if (mounted) {
+    if (mounted) {
+      listRef.get().then((list) => {
         list.forEach((item) => {
           let data = item.data();
           let { id, name } = item;
@@ -40,20 +40,19 @@ function GroceryList() {
 
           setList((list) => [...list, payload]);
         });
-      }
-    });
+      });
+    }
     return function cleanUp() {
-      mounted = false;
+      mounted = false
     };
   }, [setList]);
 
   const addToList = () => {
-    const newList = [...list];
     db.collection("list").add({
       name: input,
     });
 
-    setList([newList, { input }]);
+    setList([...list, input]);
   };
 
   const deleteItem = (id) => {
@@ -98,15 +97,19 @@ function GroceryList() {
         </Form>
         <ListGroup>
           {list.map((item, id) => (
-            <ListGroupItem className="hover d-flex" key={id}>
+            <ListGroupItem className="hover d-flex text-capitalize" key={id}>
               {item.name}
               <div className="ml-auto">
                 <img
                   className="trash"
                   src={Trash}
-                  onClick={() => deleteItem(item.id)}
+                  onClick={() => {
+                    if (window.confirm(`Delete ${item.name}?`)) {
+                      deleteItem(item.id);
+                    }
+                  }}
                   style={{ cursor: "pointer" }}
-                  alt=""
+                  alt="Delete"
                 />
               </div>
             </ListGroupItem>

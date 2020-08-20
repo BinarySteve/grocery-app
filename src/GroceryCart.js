@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
+
 // import Navigation from "./Navigation";
 // import ModalExample from "./Modal";
 import Product from "./Product";
+
 import { db } from "./firebase";
 import { Table } from "reactstrap";
 import { Redirect } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
 import bill from "./bill.png";
 
-function GroceryCart(props) {
+function GroceryCart() {
   const [{ user }] = useStateValue();
   const [products, setProducts] = useState([]);
 
@@ -47,6 +49,7 @@ function GroceryCart(props) {
       mounted = false;
     };
   }, [setProducts]);
+
   const deleteProduct = (id) => {
     db.collection("products").doc(id).delete();
     const newList = products.filter((item) => item.id !== id);
@@ -63,8 +66,8 @@ function GroceryCart(props) {
         item.quantity = quantity;
       }
       db.collection("products").doc(id).update({ name, cost, quantity });
+      return setProducts(newProducts);
     });
-    return setProducts(newProducts);
   };
   return (
     <div>
@@ -81,13 +84,13 @@ function GroceryCart(props) {
                   <th>Quantity</th>
                   <th>Name</th>
                   <th>Cost</th>
-                  <th>Edit | Delete</th>
+                  <th></th>
                 </tr>
               </thead>
 
-              {products.map((product, i) => (
+              {products.map((product) => (
                 <Product
-                  key={i}
+                  key={product.id}
                   id={product.id}
                   name={product.name}
                   cost={product.cost}

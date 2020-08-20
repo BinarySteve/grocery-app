@@ -1,0 +1,7 @@
+.grocery-input {
+  border: none !important;
+}
+
+.grocery-input:focus {
+  border: 1px solid black;
+}
