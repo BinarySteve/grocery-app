@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { auth } from "./firebase";
+import { auth } from "../firebase";
 
-import Logo from "./Logo.png";
+import Logo from "../styles/images/Logo.png";
 
-import "./Login.css";
+import "../styles/css/Login.css";
 
 function Login() {
   const [email, setEmail] = useState("");

@@ -1,11 +1,11 @@
 import React from "react";
-import "./Home.css";
+import "../styles/css/Home.css";
 import { Jumbotron } from "reactstrap";
 import { Redirect, Link } from "react-router-dom";
-import { useStateValue } from "./StateProvider";
-import require from "./require.png";
-import addBasket from "./addBasket.png";
-import bill from "./bill.png";
+import { useStateValue } from "../context/StateProvider";
+import require from "../styles/images/require.png";
+import addBasket from "../styles/images/addBasket.png";
+import bill from "../styles/images/bill.png";
 
 function Home() {
   const [{ user }] = useStateValue();

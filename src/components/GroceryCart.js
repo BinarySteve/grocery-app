@@ -4,11 +4,11 @@ import React, { useState, useEffect } from "react";
 // import ModalExample from "./Modal";
 import Product from "./Product";
 
-import { db } from "./firebase";
-import { Table } from "reactstrap";
-import { Redirect } from "react-router-dom";
-import { useStateValue } from "./StateProvider";
-import bill from "./bill.png";
+import { db } from "../firebase";
+import { Button, Table } from "reactstrap";
+import { Link, Redirect } from "react-router-dom";
+import { useStateValue } from "../context/StateProvider";
+import bill from "../styles/images/bill.png";
 
 function GroceryCart() {
   const [{ user }] = useStateValue();
@@ -56,7 +56,26 @@ function GroceryCart() {
 
     setProducts(newList);
   };
-
+  const deleteAllProducts = () => {
+    let collectionRef = db.collection("products");
+    collectionRef
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref
+            .delete()
+            .then(() => {
+              setProducts((products) => [...products]);
+            })
+            .catch(function (error) {
+              console.error("Error removing document: ", error);
+            });
+        });
+      })
+      .catch(function (error) {
+        console.log("Error getting documents: ", error);
+      });
+  };
   const updateProduct = (id, name, cost, quantity) => {
     const newProducts = [...products];
     newProducts.map((item) => {
@@ -78,6 +97,21 @@ function GroceryCart() {
               Groceries <img src={bill} width="50px" height="50px" alt="bill" />
             </h1>
             <h4>${subtotal.toFixed(2)}</h4>
+            <div className="d-flex justify-content-between mb-3">
+              <Link to="/add">
+                <Button className="shadow chavez-color">Add to Cart</Button>
+              </Link>
+              <Button
+                onClick={() => {
+                  if (window.confirm(`Delete all groceries?`)) {
+                    deleteAllProducts();
+                  }
+                }}
+                className="shadow chavez-color"
+              >
+                Clear All Groceries
+              </Button>
+            </div>
             <Table size="sm" className="text-center">
               <thead>
                 <tr>

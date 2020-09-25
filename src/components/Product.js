@@ -1,9 +1,9 @@
 import React from "react";
-import "./Product.css";
+import "../styles/css/Product.css";
 
-import Trash from "../node_modules/bootstrap-icons/icons/trash2-fill.svg";
+import Trash from "../../node_modules/bootstrap-icons/icons/trash2-fill.svg";
 
-function Product({ id, name, cost, quantity, deleteProduct, updateProduct }) {
+function Product({  name, cost, quantity, deleteProduct, updateProduct }) {
   return (
     <tbody className="text-center">
       <tr>
@@ -21,7 +21,7 @@ function Product({ id, name, cost, quantity, deleteProduct, updateProduct }) {
             className="trash "
             onClick={() => {
               if (window.confirm(`Delete ${name}?`)) {
-                deleteProduct(id);
+                deleteProduct();
               }
             }}
             src={Trash}

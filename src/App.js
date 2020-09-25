@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
-import Login from './Login';
+import Login from './components/Login';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './Home';
-import Navigation from './Navigation';
-import ProductCreate from './ProductCreate';
-import GroceryList from './GroceryList';
+import Home from './components/Home';
+import Navigation from './components/Navigation';
+import ProductCreate from './components/ProductCreate';
+import GroceryList from './components/GroceryList';
 import { auth } from './firebase';
-import { useStateValue } from './StateProvider';
-import GroceryCart from './GroceryCart';
+import { useStateValue } from './context/StateProvider';
+import GroceryCart from './components/GroceryCart';
 
 function App() {
 	const [ {}, dispatch ] = useStateValue();

@@ -10,7 +10,7 @@ import {
   NavItem,
   NavLink,
 } from "reactstrap";
-import { useStateValue } from "./StateProvider";
+import { useStateValue } from "../context/StateProvider";
 import firebase from "firebase";
 
 const Navigation = () => {
@@ -47,7 +47,7 @@ const Navigation = () => {
   //     });
   // };
   return (
-    <Navbar className="" color="dark" dark expand="md">
+    <Navbar className="chavez-color" color="dark" dark expand="md">
       <NavbarBrand onClick={toggle}>Chavez Family</NavbarBrand>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={navToggle} navbar>

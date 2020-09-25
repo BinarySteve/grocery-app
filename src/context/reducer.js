@@ -22,11 +22,8 @@ const reducer = (state, action) => {
 				...state,
 				navToggle: !state.navToggle
 			};
-		case 'ADD_TO_TOTAL':
-			return {
-				...state,
-				total: action.total
-			};
+		case 'ADD':
+			return [...state, { task: action.task, completed: false }];
 
 		default:
 			return state;

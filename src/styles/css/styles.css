@@ -1,7 +1,20 @@
+.chavez-color {
+  background-color: #2e0854 !important;
+}
+.btn.chavez-color:hover {
+  background-color: #4b0082 !important;
+}
+.chavez-color-focus:focus {
+  outline: none !important;
+  border: 1px solid #7D26CD;
+  box-shadow: 0 0 10px #719ece;
+}
+
 .trash:hover {
   animation: empty 0.2s linear;
   transform: rotate(135deg);
-  filter: invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
+  filter: invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg)
+    brightness(104%) contrast(97%);
 }
 
 @keyframes empty {
@@ -25,7 +38,6 @@
     transform: rotate(135deg);
   }
 }
-
 
 .edit:hover {
   animation: bubble 1s linear infinite;
@@ -52,7 +64,6 @@
     transform: scale(1);
   }
 }
-
 
 .l1 {
   size: 10rem;

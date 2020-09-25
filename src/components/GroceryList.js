@@ -10,12 +10,12 @@ import {
   Form,
 } from "reactstrap";
 import { Redirect } from "react-router-dom";
-import "./GroceryList.css";
-import { db } from "./firebase";
-import Trash from "../node_modules/bootstrap-icons/icons/trash2-fill.svg";
+import "../styles/css/GroceryList.css";
+import { db } from "../firebase";
+import Trash from "../../node_modules/bootstrap-icons/icons/trash2-fill.svg";
 
-import { useStateValue } from "./StateProvider";
-import require from "./require.png";
+import { useStateValue } from "../context/StateProvider";
+import require from "../styles/images/require.png";
 
 function GroceryList() {
   const [{ user }] = useStateValue();
@@ -43,7 +43,7 @@ function GroceryList() {
       });
     }
     return function cleanUp() {
-      mounted = false
+      mounted = false;
     };
   }, [setList]);
 
@@ -60,6 +60,7 @@ function GroceryList() {
     const newList = list.filter((item) => item.id !== id);
     return setList(newList);
   };
+  
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -86,10 +87,11 @@ function GroceryList() {
                   name="name"
                   id="productName"
                   placeholder="Product Name"
+                  className="chavez-color-focus"
                   required
                 />
                 <InputGroupAddon addonType="append">
-                  <Button color="secondary">Add To List</Button>
+                  <Button className="chavez-color">Add To List</Button>
                 </InputGroupAddon>
               </InputGroup>
             </FormGroup>
