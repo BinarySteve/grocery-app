@@ -18,9 +18,9 @@ import { useStateValue } from "../context/StateProvider";
 import require from "../styles/images/require.png";
 
 function GroceryList() {
+  const [list, setList] = useState([]);
   const [{ user }] = useStateValue();
   const [input, setInput] = useState("");
-  const [list, setList] = useState([]);
 
   useEffect(() => {
     //fire when page loads
@@ -52,15 +52,15 @@ function GroceryList() {
       name: input,
     });
 
-    setList([...list, input]);
+    setList([...list, { name: input }]);
   };
 
   const deleteItem = (id) => {
     db.collection("list").doc(id).delete();
     const newList = list.filter((item) => item.id !== id);
-    return setList(newList);
+    setList(newList);
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
