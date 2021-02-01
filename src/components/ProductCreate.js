@@ -75,7 +75,8 @@ function ProductCreate() {
                   onChange={(e) => setQuantity(e.target.value)}
                   name="quantity"
                   id="productQuantity"
-                  placeholder="0"
+                  placeholder="0.00"
+                  step="any"
                   min="1"
                   required
                 />
@@ -92,7 +93,7 @@ function ProductCreate() {
                   </InputGroupAddon>
                   <Input
                     className="chavez-color-focus"
-                    type="text"
+                    type="number"
                     value={cost}
                     onChange={(e) => setCost(e.target.value)}
                     name="cost"

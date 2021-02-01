@@ -54,7 +54,7 @@ const Navigation = () => {
         <Nav className="mr-auto" navbar>
           {user && (
             <NavbarText className="mr-3  text-white">
-              Hi, {user.displayName}
+              - {user.displayName} -
             </NavbarText>
           )}
           <NavItem>
